@@ -141,23 +141,27 @@ body {
         <p>2026 Anmol. Sab rights mehfooz hain.</p>
     </div>
 
-    <!-- Day 9 - Javascript Magic by Anmol -->
-     <h2>Day 9 - JavaScript Magic</h2>
-     <button onclick="greet()">Say Salam</button>
-     <button onclick="bubuSpecial()">Dudu ka Message</button>
-     <button onclick="proBano()">My Goal</button>
+    <!-- Day 10 - Javascript Magic part 2 by Anmol -->
+     <h2>Day 10 - JavaScript Magic part 2</h2>
+     
+     <button id="colorBtn" onclick="changecolor()">Mera Rang Badlo</button>
+     <button onclick="showText()">Secret Message Dikhao</button>
+
+     <p id="Secret" style="display: none; font-weight: bold; color: #d63384; margin-top: 10px;">
+        One day at a time. One line of code at a time. I'm building my future!
+     </p>
 
      <script>
-        function greet() {
-            alert("Assalam-o-Alaikum! Allah aap ka din khushiyon bhara kare - Anmol");
+        function changecolor() {
+            let btn = document.getElementById("colorBtn");
+            btn.style.backgroundColor = "#ff69b4";
+            btn.style.color = "white";
+            btn.innerHTML = "Wow! Rang Badal Gaya";
         }
 
-        function bubuSpecial() {
-            alert("Dudu kehta hai: Meri Bubu duniya ki sub se piyari Coder hai!");
-        }
-
-        function proBano() {
-            alert("Anmol: Main 30 din mein Pro developer ban kar rahungi!");
+        function showText() {
+            let msg = document.getElementById("secret");
+            msg.style.display = "block";
         }
      </script>
      </div> <!-- White card yahan khatam hota hai -->
