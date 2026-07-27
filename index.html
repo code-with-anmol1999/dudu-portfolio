@@ -102,9 +102,16 @@ body {
     box-shadow: 0 20px 40px rgba(0,0,0,0.1);
 }
 
-body.dark {
-    background: #222 !important; /* !important hai lagana */
-    color: white;
+body.dark .card { /* yahan space dekhen */
+    background: #333 !important; /* <-- #333 add kar den */
+    color: white !important; /* text white hojaye ga */
+}
+
+body.dark h2,
+body.dark h3,
+body.dark p,
+body.dark li {
+    color: white !important; /* sare text white */
 }
 
     </style>
