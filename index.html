@@ -189,6 +189,31 @@ body {
             }
         }
       </script>
+
+      <!-- Day 12 - Dark Mode Toggle Magic by Anmol -->
+       <h2>Day 12 - Dark Mode Toggle Magic</h2>
+
+       <button id="themeBtn" style="padding: 10px 15px; background-color: #333; color: white; border: none; border-radius: 5px; margin: 10px;">Dark Mode</button>
+
+       <script>
+        let isDark = false; // shuru mein light mode
+
+        document.getElementById("themeBtn").onclick = function() {
+            if(isDark == false) {
+                // Dark mode on kar do
+                document.body.style.backgroundColor = "#222";
+                document.body.style.color = "white";
+                document.getElementById("themeBtn").innerHTML = "Light Mode";
+                isDark = true;
+            } else {
+                // Light mode on kar do
+                document.body.style.backgroundColor = "white";
+                Document.body.style.color = "black";
+                document.getElementById("themeBtn").innerHTML = "Dark Mode";
+                isDark = false;
+            }
+        }
+        </script>
      </div> <!-- White card yahan khatam hota hai -->
 </body>
 </html>
