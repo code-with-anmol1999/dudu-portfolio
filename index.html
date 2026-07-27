@@ -164,6 +164,31 @@ body {
             msg.style.display = "block";
         }
      </script>
+
+     <!-- Day 11 - Form Validation Magic by Anmol -->
+      <h2>Day 11 - Form Validation Magic</h2>
+
+      <form id="contactForm">
+        <input type="text" id="name" placeholder="Apna Naam" style="display: block; margin: 5px; padding: 8px; width: 250px;"><br>
+        <input type="email" id="email" placeholder="Apna Email" style="display: block; margin: 5px; padding: 8px; width: 250px;"><br>
+        <textarea id="message" placeholder="Apna Message" style="display: block; margin: 5px; padding: 8px; width: 250px; height: 80px;"></textarea><br>
+        <button type="submit" style="padding: 10px 15px; background-color: #ff69b4; color: white; border: none; border-radius: 5px;">Bhej Do</button>
+      </form>
+
+      <script>
+        document.getElementById("contactForm").onsubmit = function() {
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+
+            if(name == "" || email == "") {
+                alert("Naam aur Email likhna zaroori hai!");
+                return false;
+            } else {
+                alert("Shukriya " + name + "! Main jald rabta karungi");
+                return false; // is se page reload nahi hoga
+            }
+        }
+      </script>
      </div> <!-- White card yahan khatam hota hai -->
 </body>
 </html>
