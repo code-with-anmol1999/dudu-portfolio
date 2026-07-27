@@ -102,9 +102,17 @@ body {
     box-shadow: 0 20px 40px rgba(0,0,0,0.1);
 }
 
+body.dark {
+    background: #222 !important; /* gradient hat jaye ga dark mein */
+    color: white;
+}
+
     </style>
 </head>
 <body>
+
+    <!-- === Day 12 KA BUTTON YAHAN LAGAYE === -->
+     <button id="themeBtn">Dark Mode</button>
 
     <div class="container"> <!-- Pro wala White Dabba Shuru -->
         
@@ -190,12 +198,7 @@ body {
         }
       </script>
 
-      <!-- Day 12 - Dark Mode Toggle Magic by Anmol -->
-       <h2>Day 12 - Dark Mode Toggle Magic</h2>
-
-       <button id="themeBtn" style="padding: 10px 15px; background-color: #333; color: white; border: none; border-radius: 5px; margin: 10px;">Dark Mode</button>
-
-       <script>
+        <script>
         let isDark = false; // shuru mein light mode
 
         document.getElementById("themeBtn").onclick = function() {
@@ -208,7 +211,7 @@ body {
             } else {
                 // Light mode on kar do
                 document.body.style.backgroundColor = "white";
-                Document.body.style.color = "black";
+                document.body.style.color = "black";
                 document.getElementById("themeBtn").innerHTML = "Dark Mode";
                 isDark = false;
             }
