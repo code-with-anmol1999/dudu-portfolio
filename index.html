@@ -101,25 +101,9 @@ body {
 .card {
     box-shadow: 0 20px 40px rgba(0,0,0,0.1);
 }
-
-body.dark .card { /* yahan space dekhen */
-    background: #333 !important; /* <-- #333 add kar den */
-    color: white !important; /* text white hojaye ga */
-}
-
-body.dark h2,
-body.dark h3,
-body.dark p,
-body.dark li {
-    color: white !important; /* sare text white */
-}
-
     </style>
 </head>
 <body>
-
-    <!-- === Day 12 KA BUTTON YAHAN LAGAYE === -->
-     <button id="themeBtn">Dark Mode</button>
 
     <div class="container"> <!-- Pro wala White Dabba Shuru -->
         
@@ -204,18 +188,7 @@ body.dark li {
             }
         }
       </script>
-
-        <script>
-        document.getElementById("themeBtn").onclick = function() {
-            document.body.classList.toggle("dark"); // bus ye 1 line kafi hai
-
-            if(document.body.classList.contains("dark")) {
-                document.getElementById("themeBtn").innerText = "Light Mode";
-            } else {
-                document.getElementById("themeBtn").innerText = "Dark Mode";
-            }
-        }
-        </script>
+      
      </div> <!-- White card yahan khatam hota hai -->
 </body>
 </html>
