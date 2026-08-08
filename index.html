@@ -188,6 +188,33 @@ body {
             }
         }
       </script>
+
+      <!-- Day 13 - Image Slider Magic by Anmol-->
+       <h2>Day 13 - Image Slider Magic</h2>
+       <img id="sliderImage" src="https://picsum.photos/400/300?random=1" style="width: 400px; height: 300px; border-radius: 10px;"><br>
+       <button id="prevBtn" style="padding: 10px; margin: 5px;">Peeche</button>
+       <button id="nextBtn" style="padding: 1opx; margin: 5px;">Aage</button>
+
+       <script>
+        let images = [
+            "https://picsum.photos/400/300?random=1",
+            "https://picsum.photos/400/300?random=2",
+            "https://picsum.photos/400/300?random=3"
+        ];
+        let current = 0;
+
+        document.getElementById("nextBtn").onclick = function() {
+            current++;
+            if(current >= images.length) current = 0;
+            document.getElementById("sliderImage").src = images[current];
+        }
+
+        document.getElementById("prevBtn").onclick = function() {
+            current--;
+            if(current < 0) current = images.length - 1;
+            document.getElementById("sliderImage").src = images[current];
+        }
+       </script>
       
      </div> <!-- White card yahan khatam hota hai -->
 </body>
