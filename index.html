@@ -215,7 +215,52 @@ body {
             document.getElementById("sliderImage").src = images[current];
         }
        </script>
-      
+
+       <!-- Day 14 - Typing Effect Magic by Anmol -->
+        <h2 id="typingText" style="color: #ff69b4; text-align: center; height: 50px; font-size: 32px;"></h2>
+
+        <script>
+            // ====== YE 3 CHEEZEIN SABSE UPER LAGAO ======
+            let texts = [
+                "Anmol | Web Developer",
+                "Main 30 Days Coding Challenge Kar rahi hun",
+                "HTML, CSS, JavaScript Seekh rahi hun",
+                "MashaaAllah! Day 14 Complete"
+            ];
+            let i = 0; // kon sa jumla 
+            let j = 0; // kon sa harf
+            let isDeleting = false;
+            // ============================================
+
+            function type() {
+                let currentText = texts[i]; // <- ye line bhi add karni hai fuction ke andar sabse pehle
+
+                if(isDeleting) {
+                    document.getElementById("typingText").innerHTML = currentText.substring(0, j-1);
+                    j--;
+                } else {
+                    document.getElementById("typingText").innerHTML = currentText.substring(0, j+1);
+                    j++;
+                }
+
+                if(!isDeleting && j == currentText.length) {
+                    isDeleting = true; // ab mitana shuru
+                    setTimeout(type, 1500); // 1.5 sec ruko
+                    return;
+                }
+                if(isDeleting && j == 0) {
+                    isDeleting = false;
+                    i++;
+                    if(i == texts.length) i = 0; // wapis pehle pe
+                }
+
+                let speed = isDeleting? 50 : 100; // mitane mein tez
+                setTimeout(type, speed);
+            }
+            type(); // shuru karo
+        </script>
+  
      </div> <!-- White card yahan khatam hota hai -->
+
 </body>
 </html>
