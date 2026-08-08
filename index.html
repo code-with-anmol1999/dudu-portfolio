@@ -259,6 +259,25 @@ body {
             }
             type(); // shuru karo
         </script>
+
+        <!-- Day 15 - Click Counter Magic by Anmol -->
+         <h2>Day 15 - Click Counter Magic</h2>
+
+         <h3 id="counter">Clicks: 0</h3>
+         <button id="clickBtn" style="padding: 15px 25px; background-color: #ff69b4; color: white; border: none; border-radius: 10px; font-size: 16px;">Mujhe Click Karo</button>
+
+         <script>
+            let count = 0; // shuru mein 0
+
+            document.getElementById("clickBtn").onclick = function() {
+                count = count + 1; // har click pe 1 se barh jao
+                document.getElementById("counter").innerHTML = "Clicks: " + count;
+
+                if(count == 10) {
+                    alert("Wah Anmol! 10 clicks ho gaye");
+                }
+            }
+         </script>
   
      </div> <!-- White card yahan khatam hota hai -->
 
