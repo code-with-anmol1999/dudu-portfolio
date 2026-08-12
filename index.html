@@ -279,6 +279,213 @@ body {
             }
          </script>
   
+<!-- ================== DAY 16 START - TO-DO LIST ================== -->
+
+<h2>Day 16 - To-Do List</h2>
+
+<div class="todo-container">
+
+    <!-- Input اور Button -->
+    <div class="todo-input">
+        <input type="text" id="taskInput" placeholder="اپنا کام یہاں لکھیں...">
+        <button onclick="addTask()">Add</button>
+    </div>
+
+    <!-- یہاں To-Do List آئے گی -->
+    <ul id="taskList"></ul>
+
+</div>
+
+<style>
+   .todo-container {
+        max-width: 500px;
+        margin: 20px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+    }
+
+   .todo-input {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+   .todo-input input {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+   .todo-input button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    #taskList {
+        list-style: none;
+        padding: 0;
+    }
+
+    #taskList li {
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    #taskList li span {
+        cursor: pointer;
+        flex: 1;
+    }
+
+    #taskList li.completed span {
+        text-decoration: line-through;
+        color: gray;
+    }
+
+    #taskList li button {
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+</style>
+
+<script>
+    // کام save کرنے کے لیے خالی array
+    let tasks = [];
+
+    // نیا کام Add کرنے کا فنکشن
+    function addTask() {
+        let input = document.getElementById("taskInput");
+        let taskText = input.value.trim();
+
+        if(taskText === "") {
+            alert("پہلے کوئی کام لکھیں");
+            return;
+        }
+
+        tasks.push({text: taskText, completed: false});
+        input.value = "";
+        showTasks();
+    }
+
+    // ساری list دکھانے کا فنکشن
+    function showTasks() {
+        let list = document.getElementById("taskList");
+        list.innerHTML = "";
+
+        tasks.forEach(function(task, index) {
+            let li = document.createElement("li");
+
+            // اگر complete ہے تو class لگا دو
+            if(task.completed) {
+                li.classList.add("completed");
+            }
+
+            let span = document.createElement("span");
+            span.innerText = task.text;
+            span.onclick = function() { toggleTask(index); }
+
+            let delBtn = document.createElement("button");
+            delBtn.innerText = "Delete";
+            delBtn.onclick = function() { deleteTask(index); }
+
+            li.appendChild(span);
+            li.appendChild(delBtn);
+            list.appendChild(li);
+        });
+    }
+
+    // کام Complete / Incomplete کرنے کا فنکشن
+    function toggleTask(index) {
+        tasks[index].completed =!tasks[index].completed;
+        showTasks();
+    }
+
+    // کام Delete کرنے کا فنکشن
+    function deleteTask(index) {
+        tasks.splice(index, 1);
+        showTasks();
+    }
+</script>
+
+<!-- ================== DAY 16 END ================== -->
+
+<!-- ================== DAY 17 START - DIGITAL CLOCK MAGIC by Anmol ================== -->
+
+<h2 style="margin-top: 40px;">Day 17 - Digital Clock Magic ⏰</h2>
+
+<div style="max-width: 500px; margin: 20px auto; padding: 30px; background: linear-gradient(135deg, #ff69b4, #ff1493); border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); text-align: center; color: white;">
+
+    <!-- Clock will appear here -->
+    <div id="clock" style="font-size: 48px; font-weight: bold; font-family: 'Arial', sans-serif; letter-spacing: 3px; margin-bottom: 10px;">
+        00:00:00 AM
+    </div>
+
+    <!-- Date will appear here -->
+    <div id="date" style="font-size: 18px; opacity: 0.9;">
+        Loading Date...
+    </div>
+
+</div>
+
+<script>
+    // This function runs every 1 second
+    function updateClock() {
+        let now = new Date(); // get current date and time
+
+        // get hours, minutes, seconds
+        let hours = now.getHours();
+        let minutes = now.getMinutes();
+        let seconds = now.getSeconds();
+
+        // check AM or PM
+        let ampm = "AM";
+        if(hours >= 12) {
+            ampm = "PM";
+        }
+        if(hours > 12) {
+            hours = hours - 12; // convert 13 to 1
+        }
+        if(hours === 0) {
+            hours = 12; // convert 0 to 12
+        }
+
+        // add leading zero for single digits
+        hours = hours < 10 ? "0" + hours : hours;
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        // display time on screen
+        let timeString = hours + ":" + minutes + ":" + seconds + " " + ampm;
+        document.getElementById("clock").innerHTML = timeString;
+
+        // display date
+        let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        let dateString = now.toLocaleDateString('en-US', options); // date in English
+        document.getElementById("date").innerHTML = dateString;
+    }
+
+    // 1. run clock as soon as page loads
+    updateClock();
+
+    // 2. run updateClock every 1000ms = 1 second
+    setInterval(updateClock, 1000);
+
+</script>
+
+<!-- ================== DAY 17 END ================== -->
+
      </div> <!-- White card yahan khatam hota hai -->
 
 </body>
