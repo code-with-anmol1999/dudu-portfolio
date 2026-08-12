@@ -486,6 +486,258 @@ body {
 
 <!-- ================== DAY 17 END ================== -->
 
+<!-- ================== DAY 18 START - 3 QUESTION QUIZ APP by Anmol ================== -->
+
+<h2 style="margin-top: 40px;">Day 18 - Quiz Test ❓</h2>
+
+<div style="max-width: 500px; margin: 20px auto; padding: 25px; background: linear-gradient(135deg, #4facfe, #00f2fe); border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); color: white;">
+
+    <div id="quiz">
+        <h3 id="question">Loading Question...</h3>
+        <div id="answers">
+            <!-- Buttons yahan JS se aayenge -->
+        </div>
+        <button id="submitBtn" onclick="submitQuiz()" style="margin-top: 15px; padding: 12px 25px; background: white; color: #00f2fe; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%;">
+            Submit Quiz
+        </button>
+    </div>
+
+    <div id="result" style="display: none; text-align: center; margin-top: 20px;">
+        <h2>آپ کا رزلٹ! 🎉</h2>
+        <p id="score" style="font-size: 24px; font-weight: bold;"></p>
+    </div>
+
+</div>
+
+<script>
+    const quizData = [
+        {
+            question: "HTML کا مطلب کیا ہے؟",
+            answers: ["High Tech Machine Language", "Hyper Text Markup Language", "Hello To My Land"],
+            correct: 1
+        },
+        {
+            question: "CSS کس کام آتی ہے؟",
+            answers: ["ویب سائٹ کو خوبصورت بنانے کے لیے", "کھانا پکانے کے لیے", "گیم کھیلنے کے لیے"],
+            correct: 0
+        },
+        {
+            question: "JavaScript کیا کرتی ہے؟",
+            answers: ["ویب سائٹ کو سٹیٹک رکھتی ہے", "ویب سائٹ کو زندہ اور انٹرایکٹو بناتی ہے", "کچھ نہیں کرتی"],
+            correct: 1
+        }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+    let userAnswers = [];
+
+    function loadQuestion() {
+        let q = quizData[currentQuestion];
+        document.getElementById("question").innerText = `سوال ${currentQuestion + 1}: ${q.question}`;
+
+        let answersDiv = document.getElementById("answers");
+        answersDiv.innerHTML = "";
+
+        q.answers.forEach((answer, index) => {
+            answersDiv.innerHTML += `
+                <label style="display: block; background: rgba(255,255,255,0.2); padding: 10px; margin: 8px 0; border-radius: 8px; cursor: pointer;">
+                    <input type="radio" name="answer" value="${index}" style="margin-right: 10px;">
+                    ${answer}
+                </label>
+            `;
+        });
+    }
+
+    function submitQuiz() {
+        let selected = document.querySelector('input[name="answer"]:checked');
+
+        if(!selected) {
+            alert("پہلے کوئی آپشن سلیکٹ کریں جانو!");
+            return;
+        }
+
+        userAnswers.push(parseInt(selected.value));
+
+        if(userAnswers.length === quizData.length) {
+            // Calculate Score
+            score = 0;
+            userAnswers.forEach((ans, i) => {
+                if(ans === quizData[i].correct) score++;
+            });
+
+            document.getElementById("quiz").style.display = "none";
+            document.getElementById("result").style.display = "block";
+            document.getElementById("score").innerText = `آپ نے ${score} / ${quizData.length} سوال ٹھیک کیے!`;
+        } else {
+            currentQuestion++;
+            loadQuestion();
+        }
+    }
+
+    // پہلا سوال لوڈ کرو
+    loadQuestion();
+
+</script>
+
+<!-- ================== DAY 18 END ================== -->
+
+<!-- ================== DAY 19 START - MOBILE CALCULATOR by Anmol ================== -->
+
+<h2 style="margin-top: 40px; text-align: center;">Day 19 - Mobile Calculator 🧮</h2>
+
+<div style="max-width: 350px; margin: 20px auto; padding: 20px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 20px; box-shadow: 0 8px 25px rgba(0,0,0,0.3); color: white; font-family: 'Arial', sans-serif;">
+
+    <!-- Display Screen -->
+    <input type="text" id="display" readonly placeholder="0" style="width: 100%; height: 70px; margin-bottom: 15px; padding: 10px; font-size: 32px; text-align: right; border: none; border-radius: 12px; background: rgba(255,255,255,0.2); color: white; box-sizing: border-box;">
+
+    <!-- Calculator Buttons Grid -->
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;">
+        
+        <!-- Row 1 -->
+        <button onclick="clearDisplay()" style="padding: 18px; font-size: 18px; font-weight: bold; border: none; border-radius: 12px; background: #ff5f6d; color: white; cursor: pointer;">C</button>
+        <button onclick="appendToDisplay('/')" style="padding: 18px; font-size: 18px; font-weight: bold; border: none; border-radius: 12px; background: rgba(255,255,255,0.25); color: white; cursor: pointer;">/</button>
+        <button onclick="appendToDisplay('*')" style="padding: 18px; font-size: 18px; font-weight: bold; border: none; border-radius: 12px; background: rgba(255,255,255,0.25); color: white; cursor: pointer;">*</button>
+        <button onclick="deleteLast()" style="padding: 18px; font-size: 18px; font-weight: bold; border: none; border-radius: 12px; background: #ff5f6d; color: white; cursor: pointer;">DEL</button>
+
+        <!-- Row 2 -->
+        <button onclick="appendToDisplay('7')" style="padding: 18px; font-size: 20px; font-weight: bold; border: none; border-radius: 12px; background: rgba(255,255,255,0.15); color: white; cursor: pointer;">7</button>
+        <button onclick="appendToDisplay('8')" style="padding: 18px; font-size: 20px; font-weight: bold; border: none; border-radius: 12px; background: rgba(255,255,255,0.15); color: white; cursor: pointer;">8</button>
+        <button onclick="appendToDisplay('9')" style="padding: 18px; font-size: 20px; font-weight: bold; border: none; border-radius: 12px; background: rgba(255,255,255,0.15); color: white; cursor: pointer;">9</button>
+        <button onclick="appendToDisplay('-')" style="padding: 18px; font-size: 18px; font-weight: bold; border: none; border-radius: 12px; background: rgba(255,255,255,0.25); color: white; cursor: pointer;">-</button>
+
+        <!-- Row 3 -->
+        <button onclick="appendToDisplay('4')" style="padding: 18px; font-size: 20px; font-weight: bold; border: none; border-radius: 12px; background: rgba(255,255,255,0.15); color: white; cursor: pointer;">4</button>
+        <button onclick="appendToDisplay('5')" style="padding: 18px; font-size: 20px; font-weight: bold; border: none; border-radius: 12px; background: rgba(255,255,255,0.15); color: white; cursor: pointer;">5</button>
+        <button onclick="appendToDisplay('6')" style="padding: 18px; font-size: 20px; font-weight: bold; border: none; border-radius: 12px; background: rgba(255,255,255,0.15); color: white; cursor: pointer;">6</button>
+        <button onclick="appendToDisplay('+')" style="padding: 18px; font-size: 18px; font-weight: bold; border: none; border-radius: 12px; background: rgba(255,255,255,0.25); color: white; cursor: pointer;">+</button>
+
+        <!-- Row 4 -->
+        <button onclick="appendToDisplay('1')" style="padding: 18px; font-size: 20px; font-weight: bold; border: none; border-radius: 12px; background: rgba(255,255,255,0.15); color: white; cursor: pointer;">1</button>
+        <button onclick="appendToDisplay('2')" style="padding: 18px; font-size: 20px; font-weight: bold; border: none; border-radius: 12px; background: rgba(255,255,255,0.15); color: white; cursor: pointer;">2</button>
+        <button onclick="appendToDisplay('3')" style="padding: 18px; font-size: 20px; font-weight: bold; border: none; border-radius: 12px; background: rgba(255,255,255,0.15); color: white; cursor: pointer;">3</button>
+        <button onclick="calculateResult()" rowspan="2" style="padding: 18px; font-size: 20px; font-weight: bold; border: none; border-radius: 12px; background: #43e97b; color: white; cursor: pointer; grid-row: span 2;">=</button>
+
+        <!-- Row 5 -->
+        <button onclick="appendToDisplay('0')" style="padding: 18px; font-size: 20px; font-weight: bold; border: none; border-radius: 12px; background: rgba(255,255,255,0.15); color: white; cursor: pointer; grid-column: span 2;">0</button>
+        <button onclick="appendToDisplay('.')" style="padding: 18px; font-size: 20px; font-weight: bold; border: none; border-radius: 12px; background: rgba(255,255,255,0.15); color: white; cursor: pointer;">.</button>
+
+    </div>
+
+</div>
+
+<script>
+    // Function to add numbers and operators to display
+    function appendToDisplay(value) {
+        document.getElementById("display").value += value;
+    }
+
+    // Function to clear the entire display
+    function clearDisplay() {
+        document.getElementById("display").value = "";
+    }
+
+    // Function to delete the last character
+    function deleteLast() {
+        let current = document.getElementById("display").value;
+        document.getElementById("display").value = current.slice(0, -1);
+    }
+
+    // Function to calculate the result
+    function calculateResult() {
+        let expression = document.getElementById("display").value;
+        try {
+            let result = eval(expression); // Calculate the math expression
+            document.getElementById("display").value = result;
+        } catch (error) {
+            alert("Invalid Calculation!");
+            clearDisplay();
+        }
+    }
+</script>
+
+<!-- ================== DAY 19 END ================== -->
+  
+<!-- ================== DAY 20 START - 100% WORKING ================== -->
+
+<h2 style="margin-top: 40px; text-align: center; color: #4c1d95;">Day 20 - Colorful Professional Tab System 🌈📑</h2>
+
+<div style="max-width: 650px; margin: 20px auto; background: white; border-radius: 20px; box-shadow: 0 8px 30px rgba(102, 126, 234, 0.2); overflow: hidden; font-family: 'Segoe UI', Arial, sans-serif; border: 2px solid #e0e7ff;">
+
+    <!-- Tab Buttons -->
+    <div style="display: flex; background: linear-gradient(135deg, #ff6b9d, #c44569, #f8b500, #667eea); padding: 8px; gap: 8px;">
+        <button class="tabBtn" onclick="openTab(event, 'about')" style="flex: 1; padding: 16px; border: none; background: rgba(255,255,255,0.35); color: white; font-size: 16px; font-weight: bold; cursor: pointer; transition: all 0.3s ease; border-radius: 12px;">
+            About Me ✨
+        </button>
+        <button class="tabBtn" onclick="openTab(event, 'skills')" style="flex: 1; padding: 16px; border: none; background: transparent; color: white; font-size: 16px; font-weight: bold; cursor: pointer; transition: all 0.3s ease; border-radius: 12px;">
+            My Skills 💪
+        </button>
+        <button class="tabBtn" onclick="openTab(event, 'contact')" style="flex: 1; padding: 16px; border: none; background: transparent; color: white; font-size: 16px; font-weight: bold; cursor: pointer; transition: all 0.3s ease; border-radius: 12px;">
+            Contact 📧
+        </button>
+    </div>
+
+    <!-- Tab 1: About -->
+    <div id="about" class="tabContent" style="padding: 35px; display: block; line-height: 1.8; color: #2d3748; background: linear-gradient(to bottom right, #fff5f7, #f0f4ff);">
+        <h3 style="color: #c44569; margin-top: 0; font-size: 24px;">About Me 👩‍💻</h3>
+        <p>Hello! My name is <b style="color: #667eea;">Anmol</b>.</p>
+        <p>I am a passionate Web Developer currently doing a <b style="color: #667eea;">30 Day Web Development Challenge</b>. I started from zero and now I can build complete websites with HTML, CSS, and JavaScript.</p>
+        <p>My goal is to become a Frontend Developer and create beautiful, responsive websites that help businesses grow online.</p>
+        <p style="font-style: italic; color: #764ba2; margin-top: 20px;">"Learning to code one day at a time" ❤️</p>
+    </div>
+
+    <!-- Tab 2: Skills -->
+    <div id="skills" class="tabContent" style="padding: 35px; display: none; line-height: 1.8; color: #2d3748; background: linear-gradient(to bottom right, #fffaf0, #e6fffa);">
+        <h3 style="color: #f8b500; margin-top: 0; font-size: 24px;">My Skills 💪</h3>
+        <p>These are the skills I have learned in the last 20 days:</p>
+        <ul style="list-style: none; padding-left: 0;">
+            <li style="margin: 12px 0; padding: 12px; background: white; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">✅ <b style="color: #e53e3e;">HTML5:</b> Semantic Tags, Forms, Tables, Lists, Images</li>
+            <li style="margin: 12px 0; padding: 12px; background: white; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">✅ <b style="color: #3182ce;">CSS3:</b> Flexbox, Grid, Responsive Design, Animations, Gradients</li>
+            <li style="margin: 12px 0; padding: 12px; background: white; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">✅ <b style="color: #d69e2e;">JavaScript:</b> Variables, Functions, DOM Manipulation, Events, Arrays</li>
+            <li style="margin: 12px 0; padding: 12px; background: white; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">✅ <b style="color: #38a169;">Projects:</b> Calculator, Quiz App, To-Do List, Digital Clock</li>
+            <li style="margin: 12px 0; padding: 12px; background: white; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">✅ <b style="color: #805ad5;">Tools:</b> VS Code, Git, GitHub, Netlify</li>
+        </ul>
+    </div>
+
+    <!-- Tab 3: Contact -->
+    <div id="contact" class="tabContent" style="padding: 35px; display: none; line-height: 1.8; color: #2d3748; background: linear-gradient(to bottom right, #f0fff4, #ebf8ff);">
+        <h3 style="color: #3182ce; margin-top: 0; font-size: 24px;">Contact Me 📧</h3>
+        <p>Let's work together! I am available for freelance projects and collaborations.</p>
+        <p><b style="color: #c44569;">Email:</b> anmol.dev@example.com</p>
+        <p><b style="color: #c44569;">Portfolio:</b> http://github.com/anmol-dev</p>
+        <p><b style="color: #c44569;">Location:</b> Karachi, Pakistan</p>
+        <div style="margin-top: 20px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 18px; border-radius: 12px; text-align: center; font-weight: 500;">
+            I reply within 24 hours. Thank you for visiting my website! 😊
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // This function runs when a tab button is clicked
+    function openTab(evt, tabName) {
+        // Step 1: Hide all tab content
+        let tabContents = document.getElementsByClassName("tabContent");
+        for (let i = 0; i < tabContents.length; i++) {
+            tabContents[i].style.display = "none";
+        }
+
+        // Step 2: Reset all tab buttons
+        let tabBtns = document.getElementsByClassName("tabBtn");
+        for (let i = 0; i < tabBtns.length; i++) {
+            tabBtns[i].style.background = "transparent";
+        }
+
+        // Step 3: Show the clicked tab content
+        document.getElementById(tabName).style.display = "block";
+
+        // Step 4: Highlight the active tab button
+        evt.currentTarget.style.background = "rgba(255,255,255,0.35)";
+    }
+</script>
+
+<!-- ================== DAY 20 END ================== -->
+
      </div> <!-- White card yahan khatam hota hai -->
 
 </body>
